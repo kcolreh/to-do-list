@@ -2,6 +2,7 @@ export function createDiv(className, id) {
     const newDiv = document.createElement('div');
     newDiv.classList.add(`${className}`);
     newDiv.id = id;
+    return newDiv;
 }
 
 export function createTitle(titleH, content, className, id) {
@@ -9,6 +10,7 @@ export function createTitle(titleH, content, className, id) {
     newTitle.classList.add(`${className}`);
     newTitle.innerHTML = content;
     newTitle.id = id;
+    return newTitle;
 }
 
 export function createParagraph(content, className, id) {
@@ -16,6 +18,7 @@ export function createParagraph(content, className, id) {
     newParagraph.classList.add(`${className}`);
     newParagraph.innerHTML = content;
     newParagraph.id = id;
+    return newParagraph;
 }
 
 export function createImage(src, className, id) {
@@ -23,19 +26,21 @@ export function createImage(src, className, id) {
     newImage.classList.add(`${className}`);
     newImage.src = src;
     newImage.id = id;
+    return newImage;
 }
 
 export function createSection(className, id) {
     const newSection = document.createElement('section');
     newSection.classList.add(`${className}`);
     newSection.id = id;
+    return newSection;
 }
 
-export function createButton(content, className, id) {
+export function createButton(content, className) {
     const newButton = document.createElement('button');
     newButton.classList.add(`${className}`);
     newButton.innerHTML = content;
-    newButton.id = id;
+    return newButton;
 }
 
 export function createList(content, id) {

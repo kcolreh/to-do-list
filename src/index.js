@@ -1,3 +1,5 @@
+import firstLoad from './loading/first-load';
+
 import './style.css';
 
 /*
@@ -34,3 +36,4 @@ function addTaskToProject() {
 }
 
 addTaskToProject();
+firstLoad();

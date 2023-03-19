@@ -17,7 +17,7 @@ function createMidSidebar() {
     let buttonIdCounter = 1;
 
     nameArray.forEach((name) => {
-        const button = createButton(`${name}`, 'sidebar-button');
+        const button = createButton(`${name}`, 'sidebar-btn');
 
         button.id = `sidebar-btn-${buttonIdCounter}`;
         buttonIdCounter += 1;
@@ -30,8 +30,11 @@ function createMidSidebar() {
 function createBotSidebar() {
     const container = createDiv('bot-sidebar-container', 'bot-sidebar');
     const title = createTitle(2, 'Projects', 'sidebar-title', 'sidebar-title-h2');
+    const button = createButton('Create new project', 'new-project-btn');
+    button.id = 'new-project-btn';
 
     container.appendChild(title);
+    container.appendChild(button);
 
     return container;
 }

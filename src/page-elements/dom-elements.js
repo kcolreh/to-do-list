@@ -55,3 +55,46 @@ export function createList(content, id) {
     });
     return newUl;
 }
+
+export function createForm(title, action, method, className) {
+    const form = document.createElement('form');
+    const formTitle = createTitle(1, title.replace(/-/g, ' '), `${title.toLowerCase()}-title`, `${title.toLowerCase()}-title`);
+
+    form.classList.add(className);
+    form.action = action;
+    form.method = method;
+
+    form.appendChild(formTitle);
+
+    return form;
+}
+
+function createInput(type, name, classNameInput, id) {
+    const input = document.createElement('input');
+    input.classList.add(classNameInput);
+    input.type = type;
+    input.name = name;
+    input.id = id;
+    input.placeholder = 'Placeholder';
+
+    return input;
+}
+
+function createLabel(forName, classNameLabel) {
+    const label = document.createElement('label');
+    label.classList.add(classNameLabel);
+    label.htmlFor = forName;
+
+    return label;
+}
+
+export function createFullInput(forName, classNameLabel, type, name, classNameInput, id) {
+    const paragraph = createParagraph(null, 'input-holder', 'input-holder');
+    const newLabel = createLabel(forName, classNameLabel);
+    const newInput = createInput(type, name, classNameInput, id);
+
+    paragraph.appendChild(newLabel);
+    paragraph.appendChild(newInput);
+
+    return paragraph;
+}

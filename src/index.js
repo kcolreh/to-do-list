@@ -16,7 +16,7 @@ import './style.css';
     3.1.User data is stored locally on users computer
 
 */
-
+/*
 // 1.User creates a project
 const projectFactory = (name, task, dueDate, status) => ({
     name, task, dueDate, status,
@@ -36,5 +36,7 @@ function addTaskToProject() {
 }
 
 addTaskToProject();
+*/
+
 firstLoad();
 newProject();

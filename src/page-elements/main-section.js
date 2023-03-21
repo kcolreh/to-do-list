@@ -11,9 +11,9 @@ function createTopSection() {
     return container;
 }
 
-function createAddSection() {
-    const container = createDiv('add-content-container', 'add-content-container');
-    const title = createTitle(1, 'Name of page', 'add-content-title', 'add-content-title-h1');
+function createProjectTitleSection() {
+    const container = createDiv('project-title-section', 'project-title-section)');
+    const title = createTitle(1, 'Name of page', 'project-title', 'project-title-h1');
 
     container.appendChild(title);
 
@@ -47,7 +47,7 @@ function createTaskSection() {
 export default function createMainSection() {
     const section = createSection('main-content-container', 'main-content-container');
     const topSection = createTopSection();
-    const midSection = createAddSection();
+    const midSection = createProjectTitleSection();
     const botSection = createTaskSection();
 
     section.appendChild(topSection);

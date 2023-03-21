@@ -31,10 +31,13 @@ function createBotSidebar() {
     const container = createDiv('bot-sidebar-container', 'bot-sidebar');
     const title = createTitle(2, 'Projects', 'sidebar-title', 'sidebar-title-h2');
     const button = createButton('Create new project', 'new-project-btn');
+    const projectContainer = createDiv('project-container', 'project-container');
+
     button.id = 'new-project-btn';
 
     container.appendChild(title);
     container.appendChild(button);
+    container.appendChild(projectContainer);
 
     return container;
 }

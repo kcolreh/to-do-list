@@ -69,13 +69,13 @@ export function createForm(title, action, method, className) {
     return form;
 }
 
-function createInput(type, name, classNameInput, id) {
+function createInput(type, name, classNameInput, id, placeholder) {
     const input = document.createElement('input');
     input.classList.add(classNameInput);
     input.type = type;
     input.name = name;
     input.id = id;
-    input.placeholder = 'Placeholder';
+    input.placeholder = placeholder;
 
     return input;
 }
@@ -88,10 +88,10 @@ function createLabel(forName, classNameLabel) {
     return label;
 }
 
-export function createFullInput(forName, classNameLabel, type, name, classNameInput, id) {
+export function createFullInput(forName, classNameLabel, type, name, classNameInput, id, pholder) {
     const paragraph = createParagraph(null, 'input-holder', 'input-holder');
     const newLabel = createLabel(forName, classNameLabel);
-    const newInput = createInput(type, name, classNameInput, id);
+    const newInput = createInput(type, name, classNameInput, id, pholder);
 
     paragraph.appendChild(newLabel);
     paragraph.appendChild(newInput);

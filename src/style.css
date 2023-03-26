@@ -107,10 +107,7 @@ h1 {
 
 /* 2.3. main-project */
 
-.project-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.task-container {
 }
 
 /* new project*/
@@ -153,6 +150,7 @@ h1 {
 .project-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .project {
@@ -166,4 +164,69 @@ h1 {
   background-color: transparent;
   color: white;
   border: white 3px solid;
+}
+
+/* new task*/
+
+.new-task-btn {
+  width: 90%;
+  height: 50px;
+  margin: 1rem;
+  background-color: transparent;
+  color: black;
+}
+
+.task-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.task {
+  border: solid black 1px;
+  width: 80%;
+  height: 40px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task > h3 {
+  color: black;
+}
+
+.task > p {
+  color: black;
+}
+
+/*new task form*/
+
+.new-task-interface {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.442);
+  height: 15 0px;
+  width: 450px;
+  padding: 1rem;
+}
+
+.new-task-name-input {
+  color: black;
+}
+
+.new-task-description-input {
+  color: black;
+}
+
+.new-task-date-input {
+  color: black;
+}
+
+.new-task-checkbox-input {
+  color: black;
 }

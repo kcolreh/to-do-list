@@ -1,8 +1,7 @@
+import { clickProject, projectIntoArray, defaultProjectClick } from '../functions/project-factory';
 import {
     createButton, createForm, createFullInput, createDiv,
 } from './dom-elements';
-
-import { addProjectToFactory } from '../functions/project-factory';
 
 let idCounter = 0;
 
@@ -15,26 +14,35 @@ function deleteForm() {
     form.remove();
 }
 
-function createProjectDom() {
+function createDefaultProject() {
     const mainProjectContainer = document.getElementById('project-container');
-    const projectNameInput = document.getElementById('projectName');
+    const newProjectContainer = createDiv('project', 'project0-id');
+    const project = createButton('Default project', 'project-main-btn');
 
-    const newProjectContainer = createDiv('project', `project${idCounter}-id`);
-    const project = createButton(`${projectNameInput.value}`, 'project-main-btn');
-
-    project.id = `project${idCounter}`;
-    project.onclick = addProjectToFactory;
+    project.id = 'default-project';
+    project.onclick = defaultProjectClick;
 
     mainProjectContainer.appendChild(newProjectContainer);
     newProjectContainer.appendChild(project);
+}
 
-    deleteForm();
+export function createProjectDom(project) {
+    const mainProjectContainer = document.getElementById('project-container');
+    const newProjectContainer = createDiv('project', `project${idCounter}-id`);
+
+    const projectBtn = createButton(`${project}`, 'project-main-btn');
+
+    projectBtn.id = `project${idCounter}`;
+    projectBtn.onclick = clickProject;
+
+    mainProjectContainer.appendChild(newProjectContainer);
+    newProjectContainer.appendChild(projectBtn);
 }
 
 function crateProjectInterface() {
     const content = document.getElementById('content');
     const form = createForm('New-Project', '', 'GET', 'new-project-interface');
-    const input = createFullInput('projectName', 'new-project-name-label', 'text', 'projectName', 'new-project-name-input', 'projectName');
+    const input = createFullInput('projectName', 'new-project-name-label', 'text', 'projectName', 'new-project-name-input', 'projectName', 'Project Title');
     const submitButton = createButton('Submit', 'submit-btn');
 
     form.id = 'new-project-form';
@@ -44,12 +52,18 @@ function crateProjectInterface() {
     form.appendChild(submitButton);
 
     submitButton.type = 'button';
-    submitButton.onclick = createProjectDom;
+    submitButton.addEventListener('click', () => {
+        const inputValue = document.getElementById('projectName');
+
+        projectIntoArray();
+        createProjectDom(inputValue.value);
+        deleteForm();
+    });
 }
 
 export default function newProject() {
     const newProjectBtn = document.getElementById('new-project-btn');
-
+    createDefaultProject();
     newProjectBtn.addEventListener('click', () => {
         crateProjectInterface();
         newProjectId();

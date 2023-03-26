@@ -1,5 +1,6 @@
 import firstLoad from './functions/first-load';
 import newProject from './page-elements/new-project';
+import newTask from './page-elements/new-task';
 import './style.css';
 
 /*
@@ -40,3 +41,4 @@ addTaskToProject();
 
 firstLoad();
 newProject();
+newTask();

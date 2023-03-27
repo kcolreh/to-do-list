@@ -1,4 +1,7 @@
-import { clickProject, projectIntoArray, defaultProjectClick } from '../functions/project-factory';
+import {
+    clickProject, projectIntoArray, defaultProjectClick, deleteProject,
+} from '../functions/project-factory';
+
 import {
     createButton, createForm, createFullInput, createDiv,
 } from './dom-elements';
@@ -14,6 +17,13 @@ function deleteForm() {
     form.remove();
 }
 
+function createDeleteBtn(id) {
+    const deleteBtn = createButton('x', 'delete-project');
+    deleteBtn.id = id;
+    deleteBtn.onclick = deleteProject;
+    return deleteBtn;
+}
+
 function createDefaultProject() {
     const mainProjectContainer = document.getElementById('project-container');
     const newProjectContainer = createDiv('project', 'project0-id');
@@ -24,6 +34,7 @@ function createDefaultProject() {
 
     mainProjectContainer.appendChild(newProjectContainer);
     newProjectContainer.appendChild(project);
+    newProjectContainer.appendChild(createDeleteBtn('delete-default-project'));
 }
 
 export function createProjectDom(project) {
@@ -37,6 +48,7 @@ export function createProjectDom(project) {
 
     mainProjectContainer.appendChild(newProjectContainer);
     newProjectContainer.appendChild(projectBtn);
+    newProjectContainer.appendChild(createDeleteBtn(`delete-project${idCounter}`));
 }
 
 function crateProjectInterface() {

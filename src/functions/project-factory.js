@@ -1,13 +1,23 @@
 import { taskArray } from './task-factory';
 import { createTaskDom } from '../page-elements/new-task';
 
-const projectArray = [];
+const projectArray = ['Default project'];
 
 export function projectIntoArray() {
     const nameInput = document.getElementById('projectName');
     const newProject = nameInput.value;
 
     projectArray.push(newProject);
+}
+
+export function deleteProject() {
+    projectArray.forEach((project) => {
+        if (project === this.previousElementSibling.innerHTML) {
+            projectArray.pop(project);
+            this.parentNode.remove();
+        } return projectArray;
+    });
+    console.log(projectArray);
 }
 
 function renderProject(projectSelected) {

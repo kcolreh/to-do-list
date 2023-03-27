@@ -156,14 +156,25 @@ h1 {
 .project {
   margin: 10px;
   width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.project > button {
-  width: 90%;
+.project-main-btn {
+  width: 80%;
   height: 25px;
   background-color: transparent;
   color: white;
   border: white 3px solid;
+}
+
+.delete-project {
+  height: 25px;
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 25px;
 }
 
 /* new task*/

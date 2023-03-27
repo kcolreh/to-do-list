@@ -1,4 +1,5 @@
 import { taskArray } from './task-factory';
+import { createTaskDom } from '../page-elements/new-task';
 
 const projectArray = [];
 
@@ -7,6 +8,25 @@ export function projectIntoArray() {
     const newProject = nameInput.value;
 
     projectArray.push(newProject);
+}
+
+function createSelectedProjectArray(projectSelected) {
+    const selectedProjectTasks = [];
+    removeElementsByClass('task');
+    taskArray.forEach((task) => {
+        if (task.projectName === projectSelected) {
+            const stringTask = JSON.stringify(task);
+            selectedProjectTasks.push(stringTask);
+            cleanString(stringTask);
+        }
+    });
+}
+
+function removeElementsByClass(className) {
+    const elements = document.getElementsByClassName(className);
+    while (elements.length > 0) {
+        elements[0].parentNode.removeChild(elements[0]);
+    }
 }
 
 export function clickProject() {
@@ -19,17 +39,6 @@ export function defaultProjectClick() {
     const projectName = document.getElementById('project-title-h1');
     projectName.innerHTML = 'Default project';
     createSelectedProjectArray('defaultProject');
-}
-
-function createSelectedProjectArray(projectSelected) {
-    const selectedProjectTasks = [];
-    taskArray.forEach((task) => {
-        if (task.projectName === projectSelected) {
-            const stringTask = JSON.stringify(task);
-            selectedProjectTasks.push(stringTask);
-            cleanString(stringTask);
-        } return selectedProjectTasks;
-    });
 }
 
 function jsonToName(fullString) {
@@ -71,5 +80,5 @@ function cleanString(fullString) {
     const description = jsonToDescription(fullString);
     const date = jsonToDate(fullString);
     const status = jsonToStatus(fullString);
-    console.log(`${name}, ${description}, ${date}, ${status}`);
+    createTaskDom(name, description, date, status);
 }

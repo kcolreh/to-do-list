@@ -1,3 +1,5 @@
+import { createTaskDom } from '../page-elements/new-task';
+
 const taskFactory = (projectName, name, description, date, status) => ({
     projectName, name, description, date, status,
 });
@@ -28,4 +30,10 @@ export default function newTask() {
     );
 
     taskIntoArray(task);
+    createTaskDom(
+        nameInput.value,
+        descriptionInput.value,
+        dateInput.value,
+        statusInput.checked,
+    );
 }

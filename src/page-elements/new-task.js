@@ -1,5 +1,5 @@
 import {
-    createButton, createForm, createFullInput,
+    createButton, createForm, createFullInput, createParagraph, createTitle, createDiv,
 } from './dom-elements';
 
 import newTask from '../functions/task-factory';
@@ -35,10 +35,26 @@ function createTaskInterface() {
     });
 }
 
-export default function newTaskCall() {
+export function newTaskCall() {
     const newTaskBtn = document.getElementById('new-task-btn');
 
     newTaskBtn.addEventListener('click', () => {
         createTaskInterface();
     });
+}
+
+export function createTaskDom(name, description, date, status) {
+    const projectContainer = document.getElementById('task-container');
+
+    const taskContainer = createDiv('task', 'task');
+    const domName = createTitle(3, name, 'task-title');
+    const domDescription = createParagraph(description, 'task-description', 'task-description');
+    const domDate = createParagraph(date, 'task-date', 'task-date');
+    const domStatus = createParagraph(status, 'task-status', 'task-status');
+
+    projectContainer.appendChild(taskContainer);
+    taskContainer.appendChild(domName);
+    taskContainer.appendChild(domDescription);
+    taskContainer.appendChild(domDate);
+    taskContainer.appendChild(domStatus);
 }

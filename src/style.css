@@ -201,6 +201,9 @@ h1 {
   color: black;
 }
 
+.important {
+  border: green 5px solid;
+}
 /*new task form*/
 
 .new-task-interface {

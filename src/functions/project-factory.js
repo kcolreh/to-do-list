@@ -10,19 +10,17 @@ export function projectIntoArray() {
     projectArray.push(newProject);
 }
 
-function createSelectedProjectArray(projectSelected) {
-    const selectedProjectTasks = [];
+function renderProject(projectSelected) {
     removeElementsByClass('task');
     taskArray.forEach((task) => {
         if (task.projectName === projectSelected) {
             const stringTask = JSON.stringify(task);
-            selectedProjectTasks.push(stringTask);
             cleanString(stringTask);
         }
     });
 }
 
-function removeElementsByClass(className) {
+export function removeElementsByClass(className) {
     const elements = document.getElementsByClassName(className);
     while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
@@ -32,13 +30,13 @@ function removeElementsByClass(className) {
 export function clickProject() {
     const projectName = document.getElementById('project-title-h1');
     projectName.innerHTML = this.innerHTML;
-    createSelectedProjectArray(this.innerHTML);
+    renderProject(this.innerHTML);
 }
 
 export function defaultProjectClick() {
     const projectName = document.getElementById('project-title-h1');
     projectName.innerHTML = 'Default project';
-    createSelectedProjectArray('defaultProject');
+    renderProject('defaultProject');
 }
 
 function jsonToName(fullString) {
@@ -75,7 +73,7 @@ function jsonToStatus(fullString) {
     return name;
 }
 
-function cleanString(fullString) {
+export function cleanString(fullString) {
     const name = jsonToName(fullString);
     const description = jsonToDescription(fullString);
     const date = jsonToDate(fullString);

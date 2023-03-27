@@ -50,11 +50,13 @@ export function createTaskDom(name, description, date, status) {
     const domName = createTitle(3, name, 'task-title');
     const domDescription = createParagraph(description, 'task-description', 'task-description');
     const domDate = createParagraph(date, 'task-date', 'task-date');
-    const domStatus = createParagraph(status, 'task-status', 'task-status');
 
     projectContainer.appendChild(taskContainer);
     taskContainer.appendChild(domName);
     taskContainer.appendChild(domDescription);
     taskContainer.appendChild(domDate);
-    taskContainer.appendChild(domStatus);
+    console.log(status);
+    if (status === true || status === 'true') {
+        taskContainer.classList.add('important');
+    }
 }

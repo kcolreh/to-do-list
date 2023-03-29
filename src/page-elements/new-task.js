@@ -2,7 +2,7 @@ import {
     createButton, createForm, createFullInput, createParagraph, createTitle, createDiv,
 } from './dom-elements';
 
-import newTask from '../functions/task-factory';
+import { newTask } from '../functions/task-factory';
 
 function deleteForm() {
     const form = document.getElementById('new-task-form');
@@ -55,7 +55,6 @@ export function createTaskDom(name, description, date, status) {
     taskContainer.appendChild(domName);
     taskContainer.appendChild(domDescription);
     taskContainer.appendChild(domDate);
-    console.log(status);
     if (status === true || status === 'true') {
         taskContainer.classList.add('important');
     }

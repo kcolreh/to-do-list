@@ -7,14 +7,27 @@ const taskFactory = (projectName, name, description, date, status) => ({
 export const taskArray = [];
 
 function taskIntoArray(task) {
-    console.log(taskArray);
     if (task.projectName === 'Default project') {
         task.projectName = 'defaultProject';
         taskArray.push(task);
     } else taskArray.push(task);
 }
 
-export default function newTask() {
+export function removeTasks(project) {
+    let taskTracker = 0;
+
+    taskArray.forEach((task) => {
+        if (task.projectName === project) {
+            taskTracker += 1;
+        } return taskTracker;
+    });
+    const indexOfTasks = taskArray.map((element) => element.projectName).indexOf(project);
+    taskArray.splice(indexOfTasks, taskTracker);
+    taskTracker = 0;
+    return taskArray;
+}
+
+export function newTask() {
     const projectName = document.getElementById('project-title-h1');
     const nameInput = document.getElementById('taskName');
     const descriptionInput = document.getElementById('taskDescription');

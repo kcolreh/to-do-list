@@ -12,7 +12,7 @@ export function sortAll() {
         });
     });
 }
-
+// not worked on
 export function sortNext7Days() {
     const daysBtn = document.getElementById('sidebar-btn-2');
 
@@ -24,7 +24,7 @@ export function sortNext7Days() {
         }
     });
 }
-
+// not worked on
 export function sortToday() {
     const todayBtn = document.getElementById('sidebar-btn-3');
 

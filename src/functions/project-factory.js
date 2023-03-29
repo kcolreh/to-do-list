@@ -1,4 +1,4 @@
-import { taskArray } from './task-factory';
+import { taskArray, removeTasks } from './task-factory';
 import { createTaskDom } from '../page-elements/new-task';
 
 const projectArray = ['Default project'];
@@ -13,11 +13,15 @@ export function projectIntoArray() {
 export function deleteProject() {
     projectArray.forEach((project) => {
         if (project === this.previousElementSibling.innerHTML) {
-            projectArray.pop(project);
+            const indexOfProject = projectArray.indexOf(project);
+            projectArray.splice(indexOfProject, 1);
             this.parentNode.remove();
+            removeTasks(project);
+            if (project === 'Default project') {
+                removeTasks('defaultProject');
+            }
         } return projectArray;
     });
-    console.log(projectArray);
 }
 
 function renderProject(projectSelected) {

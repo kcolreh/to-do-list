@@ -1,5 +1,7 @@
 import { createTaskDom } from '../page-elements/new-task';
 
+import { removeElementsByClass } from './project-factory';
+
 const taskFactory = (projectName, name, description, date, status) => ({
     projectName, name, description, date, status,
 });
@@ -13,6 +15,26 @@ function taskIntoArray(task) {
     } else taskArray.push(task);
 }
 
+export function removeTask() {
+    const taskName = this.previousElementSibling
+        .previousElementSibling
+        .previousElementSibling.innerHTML;
+    const taskDescription = this.previousElementSibling
+        .previousElementSibling.innerHTML;
+    const taskDate = this.previousElementSibling.innerHTML;
+
+    taskArray.forEach((task) => {
+        if (task.name === taskName
+            && task.description === taskDescription
+            && task.date === taskDate) {
+            const indexOfTask = taskArray.indexOf(task);
+            taskArray.splice(indexOfTask, 1);
+            this.parentNode.remove();
+        }
+    });
+    return taskArray;
+}
+
 export function removeTasks(project) {
     let taskTracker = 0;
 
@@ -21,6 +43,8 @@ export function removeTasks(project) {
             taskTracker += 1;
         } return taskTracker;
     });
+
+    removeElementsByClass(project.replace(/\s/g, ''));
     const indexOfTasks = taskArray.map((element) => element.projectName).indexOf(project);
     taskArray.splice(indexOfTasks, taskTracker);
     taskTracker = 0;
@@ -33,7 +57,6 @@ export function newTask() {
     const descriptionInput = document.getElementById('taskDescription');
     const dateInput = document.getElementById('taskDate');
     const statusInput = document.getElementById('taskStatus');
-
     const task = taskFactory(
         projectName.innerHTML,
         nameInput.value,
@@ -48,5 +71,6 @@ export function newTask() {
         descriptionInput.value,
         dateInput.value,
         statusInput.checked,
+        projectName.innerHTML.replace(/\s/g, ''),
     );
 }

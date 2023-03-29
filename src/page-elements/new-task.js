@@ -2,7 +2,7 @@ import {
     createButton, createForm, createFullInput, createParagraph, createTitle, createDiv,
 } from './dom-elements';
 
-import { newTask } from '../functions/task-factory';
+import { newTask, removeTask } from '../functions/task-factory';
 
 function deleteForm() {
     const form = document.getElementById('new-task-form');
@@ -43,13 +43,23 @@ export function newTaskCall() {
     });
 }
 
-export function createTaskDom(name, description, date, status) {
+function createDeleteBtn(id) {
+    const deleteBtn = createButton('x', 'delete-task');
+    deleteBtn.id = id;
+    deleteBtn.onclick = removeTask;
+    return deleteBtn;
+}
+
+export function createTaskDom(name, description, date, status, projectClass) {
     const projectContainer = document.getElementById('task-container');
 
     const taskContainer = createDiv('task', 'task');
     const domName = createTitle(3, name, 'task-title');
     const domDescription = createParagraph(description, 'task-description', 'task-description');
     const domDate = createParagraph(date, 'task-date', 'task-date');
+    const removeButton = createDeleteBtn(null);
+
+    taskContainer.classList.add(projectClass);
 
     projectContainer.appendChild(taskContainer);
     taskContainer.appendChild(domName);
@@ -58,4 +68,5 @@ export function createTaskDom(name, description, date, status) {
     if (status === true || status === 'true') {
         taskContainer.classList.add('important');
     }
+    taskContainer.appendChild(removeButton);
 }

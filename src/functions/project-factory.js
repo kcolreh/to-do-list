@@ -22,6 +22,7 @@ export function deleteProject() {
             }
         } return projectArray;
     });
+    noProjectsLeft();
 }
 
 function renderProject(projectSelected) {
@@ -51,6 +52,16 @@ export function defaultProjectClick() {
     const projectName = document.getElementById('project-title-h1');
     projectName.innerHTML = 'Default project';
     renderProject('defaultProject');
+}
+
+function noProjectsLeft() {
+    const projectName = document.getElementById('project-title-h1');
+    const projectContainer = document.getElementById('project-container');
+    const newTaskBtn = document.getElementById('new-task-btn');
+    if (projectContainer.hasChildNodes() === false) {
+        projectName.innerHTML = 'Please make a new project!';
+        newTaskBtn.disabled = true;
+    }
 }
 
 function jsonToName(fullString) {

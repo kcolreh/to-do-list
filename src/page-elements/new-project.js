@@ -56,6 +56,7 @@ function crateProjectInterface() {
     const form = createForm('New-Project', '', 'GET', 'new-project-interface');
     const input = createFullInput('projectName', 'new-project-name-label', 'text', 'projectName', 'new-project-name-input', 'projectName', 'Project Title');
     const submitButton = createButton('Submit', 'submit-btn');
+    const projectName = document.getElementById('project-title-h1');
 
     form.id = 'new-project-form';
 
@@ -66,7 +67,7 @@ function crateProjectInterface() {
     submitButton.type = 'button';
     submitButton.addEventListener('click', () => {
         const inputValue = document.getElementById('projectName');
-
+        projectName.innerHTML = inputValue.value;
         projectIntoArray();
         createProjectDom(inputValue.value);
         deleteForm();
@@ -75,9 +76,12 @@ function crateProjectInterface() {
 
 export default function newProject() {
     const newProjectBtn = document.getElementById('new-project-btn');
+    const newTaskBtn = document.getElementById('new-task-btn');
+
     createDefaultProject();
     newProjectBtn.addEventListener('click', () => {
         crateProjectInterface();
         newProjectId();
+        newTaskBtn.disabled = false;
     });
 }

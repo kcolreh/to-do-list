@@ -1,10 +1,12 @@
 import {
-    clickProject, projectIntoArray, defaultProjectClick, deleteProject,
+    clickProject, projectIntoArray, defaultProjectClick, deleteProject, renderProject,
 } from '../functions/project-factory';
 
 import {
     createButton, createForm, createFullInput, createDiv,
 } from './dom-elements';
+
+import { getProjectStatus } from '../functions/sort-tasks';
 
 let idCounter = 0;
 
@@ -70,7 +72,9 @@ function crateProjectInterface() {
         projectName.innerHTML = inputValue.value;
         projectIntoArray();
         createProjectDom(inputValue.value);
+        getProjectStatus(projectName.innerHTML);
         deleteForm();
+        renderProject(input.value);
     });
 }
 

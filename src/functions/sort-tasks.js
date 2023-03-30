@@ -1,6 +1,14 @@
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import { taskArray } from './task-factory';
 import { cleanString, removeElementsByClass } from './project-factory';
+import { sort7DaysBoolean, sortTodayBoolean } from './date-logic';
+
+let projectStatus = 'defaultProject';
+
+export function getProjectStatus(status) {
+    projectStatus = status;
+    return projectStatus;
+}
 
 export function sortAll() {
     const allBtn = document.getElementById('sidebar-btn-1');
@@ -10,12 +18,14 @@ export function sortAll() {
         mainSortTitle.innerHTML = allBtn.innerHTML;
         removeElementsByClass('task');
         taskArray.forEach((task) => {
-            const stringTask = JSON.stringify(task);
-            cleanString(stringTask);
+            if (task.projectName === projectStatus) {
+                const stringTask = JSON.stringify(task);
+                cleanString(stringTask);
+            }
         });
     });
 }
-// not worked on
+
 export function sortNext7Days() {
     const daysBtn = document.getElementById('sidebar-btn-2');
     const mainSortTitle = document.getElementById('main-content-title-h1');
@@ -24,15 +34,14 @@ export function sortNext7Days() {
         removeElementsByClass('task');
         mainSortTitle.innerHTML = daysBtn.innerHTML;
         taskArray.forEach((task) => {
-            const distance = formatDistanceToNowStrict(new Date(task.date), { unit: 'day' });
-            if (parseInt(distance, 10) < 8) {
+            if (sort7DaysBoolean(task.date) === true && task.projectName === projectStatus) {
                 const stringTask = JSON.stringify(task);
                 cleanString(stringTask);
             }
         });
     });
 }
-// not worked on
+
 export function sortToday() {
     const todayBtn = document.getElementById('sidebar-btn-3');
     const mainSortTitle = document.getElementById('main-content-title-h1');
@@ -41,8 +50,7 @@ export function sortToday() {
         removeElementsByClass('task');
         mainSortTitle.innerHTML = todayBtn.innerHTML;
         taskArray.forEach((task) => {
-            const distance = formatDistanceToNowStrict(new Date(task.date), { unit: 'day' });
-            if (parseInt(distance, 10) === 1) {
+            if (sortTodayBoolean(task.date) === true && task.projectName === projectStatus) {
                 const stringTask = JSON.stringify(task);
                 cleanString(stringTask);
             }
@@ -58,7 +66,7 @@ export function sortImportant() {
         mainSortTitle.innerHTML = importantBtn.innerHTML;
         removeElementsByClass('task');
         taskArray.forEach((task) => {
-            if (task.status === true) {
+            if (task.status === true && task.projectName === projectStatus) {
                 const stringTask = JSON.stringify(task);
                 cleanString(stringTask);
             }

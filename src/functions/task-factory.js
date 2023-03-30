@@ -1,5 +1,5 @@
 import { createTaskDom } from '../page-elements/new-task';
-
+import { sort7DaysBoolean, sortTodayBoolean } from './date-logic';
 import { removeElementsByClass } from './project-factory';
 
 const taskFactory = (projectName, name, description, date, status) => ({
@@ -51,7 +51,7 @@ export function removeTasks(project) {
     return taskArray;
 }
 
-export function newTask() {
+export function newTask(status) {
     const projectName = document.getElementById('project-title-h1');
     const nameInput = document.getElementById('taskName');
     const descriptionInput = document.getElementById('taskDescription');
@@ -64,13 +64,52 @@ export function newTask() {
         dateInput.value,
         statusInput.checked,
     );
-
     taskIntoArray(task);
-    createTaskDom(
-        nameInput.value,
-        descriptionInput.value,
-        dateInput.value,
-        statusInput.checked,
-        projectName.innerHTML.replace(/\s/g, ''),
-    );
+
+    if (status === 3 && statusInput.checked === true) {
+        createTaskDom(
+            nameInput.value,
+            descriptionInput.value,
+            dateInput.value,
+            statusInput.checked,
+            projectName.innerHTML.replace(/\s/g, ''),
+        );
+    } else if (status === 2 && sortTodayBoolean(dateInput.value) === true) {
+        createTaskDom(
+            nameInput.value,
+            descriptionInput.value,
+            dateInput.value,
+            statusInput.checked,
+            projectName.innerHTML.replace(/\s/g, ''),
+        );
+    } else if (status === 1 && sort7DaysBoolean(dateInput.value) === true) {
+        createTaskDom(
+            nameInput.value,
+            descriptionInput.value,
+            dateInput.value,
+            statusInput.checked,
+            projectName.innerHTML.replace(/\s/g, ''),
+        );
+    } else if (status === 0) {
+        createTaskDom(
+            nameInput.value,
+            descriptionInput.value,
+            dateInput.value,
+            statusInput.checked,
+            projectName.innerHTML.replace(/\s/g, ''),
+        );
+    }
+}
+
+export function sortStatus() {
+    const statusCheck = document.getElementById('main-content-title-h1');
+    let status = 0;
+    if (statusCheck.innerHTML === 'Next 7 days') {
+        status = 1;
+    } else if (statusCheck.innerHTML === 'Today') {
+        status = 2;
+    } else if (statusCheck.innerHTML === 'Important') {
+        status = 3;
+    }
+    newTask(status);
 }

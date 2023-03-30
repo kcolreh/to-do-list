@@ -2,7 +2,7 @@ import {
     createButton, createForm, createFullInput, createParagraph, createTitle, createDiv,
 } from './dom-elements';
 
-import { newTask, removeTask } from '../functions/task-factory';
+import { sortStatus, removeTask } from '../functions/task-factory';
 
 function deleteForm() {
     const form = document.getElementById('new-task-form');
@@ -30,7 +30,7 @@ function createTaskInterface() {
     submitButton.type = 'button';
 
     submitButton.addEventListener('click', () => {
-        newTask();
+        sortStatus();
         deleteForm();
     });
 }

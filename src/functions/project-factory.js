@@ -1,5 +1,6 @@
 import { taskArray, removeTasks } from './task-factory';
 import { createTaskDom } from '../page-elements/new-task';
+import { getProjectStatus } from './sort-tasks';
 
 const projectArray = ['Default project'];
 
@@ -25,9 +26,8 @@ export function deleteProject() {
     noProjectsLeft();
 }
 
-function renderProject(projectSelected) {
+export function renderProject(projectSelected) {
     const sortType = document.getElementById('main-content-title-h1');
-    console.log(sortType);
     removeElementsByClass('task');
     taskArray.forEach((task) => {
         if (task.projectName === projectSelected) {
@@ -47,12 +47,14 @@ export function removeElementsByClass(className) {
 export function clickProject() {
     const projectName = document.getElementById('project-title-h1');
     projectName.innerHTML = this.innerHTML;
+    getProjectStatus(projectName.innerHTML);
     renderProject(this.innerHTML);
 }
 
 export function defaultProjectClick() {
     const projectName = document.getElementById('project-title-h1');
     projectName.innerHTML = 'Default project';
+    getProjectStatus('defaultProject');
     renderProject('defaultProject');
 }
 

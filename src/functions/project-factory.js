@@ -26,6 +26,8 @@ export function deleteProject() {
 }
 
 function renderProject(projectSelected) {
+    const sortType = document.getElementById('main-content-title-h1');
+    console.log(sortType);
     removeElementsByClass('task');
     taskArray.forEach((task) => {
         if (task.projectName === projectSelected) {

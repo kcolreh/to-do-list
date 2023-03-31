@@ -2,7 +2,7 @@ import {
     createButton, createForm, createFullInput, createParagraph, createTitle, createDiv,
 } from './dom-elements';
 
-import { sortStatus, removeTask } from '../functions/task-factory';
+import { sortStatus, removeTask, clickTask } from '../functions/task-factory';
 
 function deleteForm() {
     const form = document.getElementById('new-task-form');
@@ -60,6 +60,7 @@ export function createTaskDom(name, description, date, status, projectClass) {
     const removeButton = createDeleteBtn(null);
 
     taskContainer.classList.add(projectClass);
+    taskContainer.onclick = clickTask;
 
     projectContainer.appendChild(taskContainer);
     taskContainer.appendChild(domName);

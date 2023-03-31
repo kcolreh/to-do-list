@@ -113,3 +113,9 @@ export function sortStatus() {
     }
     newTask(status);
 }
+
+export function clickTask() {
+    if (this.classList.contains('completed')) {
+        this.classList.remove('completed');
+    } else { this.classList.add('completed'); }
+}

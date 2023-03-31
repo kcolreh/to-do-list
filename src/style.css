@@ -33,6 +33,9 @@ h1 {
   align-items: center;
 }
 
+.sidebar-title {
+}
+
 /* 1.2. Sidebar-mid */
 
 .mid-sidebar-container {
@@ -43,9 +46,16 @@ h1 {
 }
 
 .sidebar-btn {
-  margin: 1rem;
-  color: black;
-  width: 40%;
+  background-color: transparent;
+  border: solid 3px white;
+  border-radius: 5px;
+  padding: 4px;
+  margin: 0.7rem;
+  color: white;
+  width: 80%;
+  font-size: inherit;
+  font-weight: 900;
+  letter-spacing: 2px;
 }
 
 /* 1.3. Sidebar-bot */
@@ -58,10 +68,52 @@ h1 {
 }
 
 .new-project-btn {
-  color: black;
-  font-size: 1rem;
+  background-color: transparent;
+  border: solid 3px white;
+  border-radius: 5px;
+  padding: 7px;
+  margin: 0rem;
+  color: white;
   width: 80%;
-  padding: 0.5rem;
+  font-size: inherit;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.project-main-btn {
+  background-color: transparent;
+  border: solid 2px white;
+  border-radius: 5px;
+  padding: 7px;
+  margin: 3px;
+  color: white;
+  width: 100%;
+  font-size: 0.9em;
+  font-weight: 300;
+}
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: inherit;
+  overflow-y: auto;
+}
+
+.project {
+  margin: 10px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-project {
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 2rem;
+  font-weight: 900;
 }
 
 /* 2. main-container */
@@ -147,36 +199,6 @@ h1 {
   color: white;
 }
 
-.project-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.project {
-  margin: 10px;
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.project-main-btn {
-  width: 80%;
-  height: 25px;
-  background-color: transparent;
-  color: white;
-  border: white 3px solid;
-}
-
-.delete-project {
-  height: 25px;
-  background-color: transparent;
-  border: none;
-  color: red;
-  font-size: 25px;
-}
-
 /* new task*/
 
 .new-task-btn {
@@ -215,6 +237,10 @@ h1 {
 .important {
   border: green 5px solid;
 }
+
+.completed {
+  background-color: green;
+}
 /*new task form*/
 
 .new-task-interface {
@@ -243,4 +269,14 @@ h1 {
 
 .new-task-checkbox-input {
   color: black;
+}
+
+/** Scroll-bar **/
+::-webkit-scrollbar {
+  width: 20px;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(62, 62, 208);
+  border-radius: 20px;
 }

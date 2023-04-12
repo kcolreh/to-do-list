@@ -1,18 +1,33 @@
 import { createTaskDom } from '../page-elements/new-task';
 import { sort7DaysBoolean, sortTodayBoolean } from './date-logic';
-import { removeElementsByClass } from './project-factory';
+import { removeElementsByClass, cleanStringForTask } from './project-factory';
 
-const taskFactory = (projectName, name, description, date, status) => ({
+export const taskFactory = (projectName, name, description, date, status) => ({
     projectName, name, description, date, status,
 });
 
 export const taskArray = [];
 
+export function localToArray() {
+    let i = 0;
+    while (i < localStorage.length) {
+        const item = localStorage.key(i);
+        const cleanItem = cleanStringForTask(item);
+        taskArray.push(cleanItem);
+        i += 1;
+    }
+}
+
+function storeTaskArrayIntoLocal(task) {
+    if (window.localStorage.getItem(JSON.stringify(task)) === JSON.stringify(task)) {
+        return;
+    }
+    window.localStorage.setItem(JSON.stringify(task), JSON.stringify(task));
+}
+
 function taskIntoArray(task) {
-    if (task.projectName === 'Default project') {
-        task.projectName = 'defaultProject';
-        taskArray.push(task);
-    } else taskArray.push(task);
+    taskArray.push(task);
+    storeTaskArrayIntoLocal(task);
 }
 
 export function removeTask() {
@@ -27,6 +42,7 @@ export function removeTask() {
         if (task.name === taskName
             && task.description === taskDescription
             && task.date === taskDate) {
+            removeFromLocal(task);
             const indexOfTask = taskArray.indexOf(task);
             taskArray.splice(indexOfTask, 1);
             this.parentNode.remove();
@@ -35,11 +51,17 @@ export function removeTask() {
     return taskArray;
 }
 
+function removeFromLocal(task) {
+    const taskJson = JSON.stringify(task);
+    window.localStorage.removeItem(taskJson);
+}
+
 export function removeTasks(project) {
     let taskTracker = 0;
 
     taskArray.forEach((task) => {
         if (task.projectName === project) {
+            removeFromLocal(task);
             taskTracker += 1;
         } return taskTracker;
     });
@@ -65,7 +87,6 @@ export function newTask(status) {
         statusInput.checked,
     );
     taskIntoArray(task);
-
     if (status === 3 && statusInput.checked === true) {
         createTaskDom(
             nameInput.value,

@@ -3,7 +3,7 @@ import { taskArray } from './task-factory';
 import { cleanString, removeElementsByClass } from './project-factory';
 import { sort7DaysBoolean, sortTodayBoolean } from './date-logic';
 
-let projectStatus = 'defaultProject';
+let projectStatus = document.getElementById('project-title-h1');
 
 export function getProjectStatus(status) {
     projectStatus = status;

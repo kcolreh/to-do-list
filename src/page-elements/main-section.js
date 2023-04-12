@@ -13,7 +13,7 @@ function createTopSection() {
 
 function createProjectTitleSection() {
     const container = createDiv('project-title-section', 'project-title-section)');
-    const title = createTitle(1, 'Default project', 'project-title', 'project-title-h1');
+    const title = createTitle(1, 'Project Name', 'project-title', 'project-title-h1');
 
     container.appendChild(title);
 

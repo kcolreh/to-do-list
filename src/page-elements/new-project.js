@@ -1,5 +1,5 @@
 import {
-    clickProject, projectIntoArray, defaultProjectClick, deleteProject, renderProject,
+    clickProject, projectIntoArray, deleteProject, renderProject,
 } from '../functions/project-factory';
 
 import {
@@ -19,24 +19,20 @@ function deleteForm() {
     form.remove();
 }
 
-function createDeleteBtn(id) {
-    const deleteBtn = createButton('x', 'delete-project');
-    deleteBtn.id = id;
-    deleteBtn.onclick = deleteProject;
-    return deleteBtn;
+export function defaultProjectLoad() {
+    const projectTitle = document.getElementById('project-title-h1');
+    const newTaskBtn = document.getElementById('new-task-btn');
+    if (projectTitle.innerHTML === 'Project Name') {
+        projectTitle.innerHTML = 'Select a project';
+        newTaskBtn.disabled = true;
+    }
 }
 
-function createDefaultProject() {
-    const mainProjectContainer = document.getElementById('project-container');
-    const newProjectContainer = createDiv('project', 'project0-id');
-    const project = createButton('Default project', 'project-main-btn');
+function createDeleteBtn() {
+    const deleteBtn = createButton('x', 'delete-project');
 
-    project.id = 'default-project';
-    project.onclick = defaultProjectClick;
-
-    mainProjectContainer.appendChild(newProjectContainer);
-    newProjectContainer.appendChild(project);
-    newProjectContainer.appendChild(createDeleteBtn('delete-default-project'));
+    deleteBtn.onclick = deleteProject;
+    return deleteBtn;
 }
 
 export function createProjectDom(project) {
@@ -50,7 +46,7 @@ export function createProjectDom(project) {
 
     mainProjectContainer.appendChild(newProjectContainer);
     newProjectContainer.appendChild(projectBtn);
-    newProjectContainer.appendChild(createDeleteBtn(`delete-project${idCounter}`));
+    newProjectContainer.appendChild(createDeleteBtn());
 }
 
 function crateProjectInterface() {
@@ -78,11 +74,10 @@ function crateProjectInterface() {
     });
 }
 
-export default function newProject() {
+export function newProject() {
     const newProjectBtn = document.getElementById('new-project-btn');
     const newTaskBtn = document.getElementById('new-task-btn');
 
-    createDefaultProject();
     newProjectBtn.addEventListener('click', () => {
         crateProjectInterface();
         newProjectId();

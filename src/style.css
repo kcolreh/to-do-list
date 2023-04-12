@@ -5,12 +5,13 @@
   color: white;
 }
 
+body,
 h1 {
   margin: 0;
 }
 
 .content {
-  background-color: rgba(240, 248, 255, 0.164);
+  background-color: rgba(228, 247, 231, 0.164);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -119,7 +120,7 @@ h1 {
 /* 2. main-container */
 
 .main-content-container {
-  background-color: rgba(210, 255, 196, 0.199);
+  background-color: rgba(0, 0, 255, 0.222);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,36 +131,40 @@ h1 {
 /* 2.1. main-top */
 
 .main-content-header {
-  background-color: rgba(210, 255, 196, 222);
+  background-color: rgba(0, 0, 255, 0.355);
   height: 10%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  letter-spacing: 5px;
 }
 
 /* 2.2. main-mid */
 
 .project-title-section {
-  background-color: rgba(210, 255, 196, 0.499);
+  background-color: rgba(0, 0, 255, 0.222);
   height: 10%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  letter-spacing: 5px;
 }
 
 .task-content-container {
-  background-color: rgba(210, 255, 196, 0.799);
-  width: 90%;
-  height: 80%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  background-color: rgba(0, 0, 255, 0.222);
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 /* 2.3. main-project */
 
 .task-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 /* new project*/
@@ -186,6 +191,7 @@ h1 {
   color: black;
   height: 1.5rem;
   width: 200px;
+  padding-left: 5px;
 }
 
 .new-project-name-label {
@@ -197,6 +203,7 @@ h1 {
   width: 100px;
   background-color: transparent;
   color: white;
+  border: solid rgb(255, 253, 253) 2px;
 }
 
 /* new task*/
@@ -206,7 +213,18 @@ h1 {
   height: 50px;
   margin: 1rem;
   background-color: transparent;
-  color: black;
+  border: solid 5px white;
+  font-size: 1.5rem;
+  letter-spacing: 5px;
+  padding: 5px;
+  color: white;
+  border-radius: 10px;
+  padding: 7px;
+  font-weight: 300;
+}
+
+.new-task-btn:disabled {
+  border: solid 5px grey;
 }
 
 .task-container {
@@ -214,32 +232,51 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .task {
-  border: solid black 1px;
-  width: 80%;
-  height: 40px;
+  border: solid rgb(255, 255, 255) 3px;
+  width: 85%;
+  height: 50px;
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 5px;
 }
 
 .task > h3 {
-  color: black;
+  color: white;
+  font-weight: 900;
+  font-size: 20px;
+  width: 20%;
 }
 
 .task > p {
-  color: black;
+  color: white;
+  font-weight: 300;
+  font-size: 15px;
+  width: 30%;
+}
+
+.task > button {
+  background-color: transparent;
+  border: none;
+  color: red;
+  font-size: 2rem;
+  font-weight: 900;
 }
 
 .important {
-  border: green 5px solid;
+  border: rgba(115, 0, 128, 0.295) 5px solid;
 }
 
 .completed {
-  background-color: green;
+  background-color: rgba(0, 128, 0, 0.295);
 }
 /*new task form*/
 
@@ -277,6 +314,6 @@ h1 {
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(62, 62, 208);
+  background-color: rgba(62, 62, 208, 0.71);
   border-radius: 20px;
 }

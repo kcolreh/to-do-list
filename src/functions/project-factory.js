@@ -1,14 +1,31 @@
-import { taskArray, removeTasks } from './task-factory';
+import { taskArray, removeTasks, taskFactory } from './task-factory';
 import { createTaskDom } from '../page-elements/new-task';
 import { getProjectStatus } from './sort-tasks';
+import { createProjectDom } from '../page-elements/new-project';
 
-const projectArray = ['Default project'];
+const projectArray = [];
+
+function storeProjectInLocal() {
+    projectArray.forEach((project) => {
+        window.localStorage.setItem(project, project);
+    });
+}
+
+export function renderStoredProjects() {
+    for (let i = 0; i < localStorage.length; i += 1) {
+        if (window.localStorage.key(i).includes('projectName') === false) {
+            projectArray.push(window.localStorage.key(i));
+            createProjectDom(window.localStorage.key(i));
+        }
+    }
+}
 
 export function projectIntoArray() {
     const nameInput = document.getElementById('projectName');
     const newProject = nameInput.value;
 
     projectArray.push(newProject);
+    storeProjectInLocal();
 }
 
 export function deleteProject() {
@@ -18,16 +35,13 @@ export function deleteProject() {
             projectArray.splice(indexOfProject, 1);
             this.parentNode.remove();
             removeTasks(project);
-            if (project === 'Default project') {
-                removeTasks('defaultProject');
-            }
+            window.localStorage.removeItem(project);
         } return projectArray;
     });
     noProjectsLeft();
 }
 
 export function renderProject(projectSelected) {
-    const sortType = document.getElementById('main-content-title-h1');
     removeElementsByClass('task');
     taskArray.forEach((task) => {
         if (task.projectName === projectSelected) {
@@ -46,19 +60,15 @@ export function removeElementsByClass(className) {
 
 export function clickProject() {
     const projectName = document.getElementById('project-title-h1');
+    const taskBtn = document.getElementById('new-task-btn');
+
     projectName.innerHTML = this.innerHTML;
     getProjectStatus(projectName.innerHTML);
     renderProject(this.innerHTML);
+    taskBtn.disabled = false;
 }
 
-export function defaultProjectClick() {
-    const projectName = document.getElementById('project-title-h1');
-    projectName.innerHTML = 'Default project';
-    getProjectStatus('defaultProject');
-    renderProject('defaultProject');
-}
-
-function noProjectsLeft() {
+export function noProjectsLeft() {
     const projectName = document.getElementById('project-title-h1');
     const projectContainer = document.getElementById('project-container');
     const newTaskBtn = document.getElementById('new-task-btn');
@@ -66,6 +76,15 @@ function noProjectsLeft() {
         projectName.innerHTML = 'Please make a new project!';
         newTaskBtn.disabled = true;
     }
+}
+
+function jsonToProjectName(fullString) {
+    const searchName = ':"';
+    const searchDescription = '","name"';
+    const indexOfName = fullString.indexOf(searchName);
+    const infexOfDescription = fullString.indexOf(searchDescription);
+    const name = fullString.slice(indexOfName + 2, infexOfDescription);
+    return name;
 }
 
 function jsonToName(fullString) {
@@ -108,4 +127,15 @@ export function cleanString(fullString) {
     const date = jsonToDate(fullString);
     const status = jsonToStatus(fullString);
     createTaskDom(name, description, date, status);
+}
+
+export function cleanStringForTask(fullString) {
+    const project = jsonToProjectName(fullString);
+    const name = jsonToName(fullString);
+    const description = jsonToDescription(fullString);
+    const date = jsonToDate(fullString);
+    const status = jsonToStatus(fullString);
+    if (status === 'true') {
+        return taskFactory(project, name, description, date, true);
+    } return taskFactory(project, name, description, date, false);
 }

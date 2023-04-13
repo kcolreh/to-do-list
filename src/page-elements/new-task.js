@@ -3,6 +3,7 @@ import {
 } from './dom-elements';
 
 import { sortStatus, removeTask, clickTask } from '../functions/task-factory';
+import { validateTaskForm } from '../functions/validation';
 
 function deleteForm() {
     const form = document.getElementById('new-task-form');
@@ -15,7 +16,7 @@ function createTaskInterface() {
     const inputTitle = createFullInput('taskName', 'new-task-name-label', 'text', 'taskName', 'new-task-name-input', 'taskName', 'Task Name');
     const inputDescription = createFullInput('taskDescription', 'new-task-description-label', 'text-area', 'taskDescription', 'new-task-name-input', 'taskDescription', 'Task Description');
     const inputDate = createFullInput('taskDate', 'new-task-date-label', 'date', 'taskDate', 'new-task-name-input', 'taskDate', '1994-10-03');
-    const inputStatus = createFullInput('taskStatus', 'new-task-checkbox-label', 'checkbox', 'taskStatus', 'new-task-name-input', 'taskStatus');
+    const inputStatus = createFullInput('taskStatus', 'new-task-checkbox-label', 'checkbox', 'taskStatus', 'new-task-name-status', 'taskStatus', 'Importance', 'Important');
     const submitButton = createButton('Submit', 'submit-btn');
 
     form.id = 'new-task-form';
@@ -30,8 +31,10 @@ function createTaskInterface() {
     submitButton.type = 'button';
 
     submitButton.addEventListener('click', () => {
-        sortStatus();
-        deleteForm();
+        if (validateTaskForm() === true) {
+            sortStatus();
+            deleteForm();
+        }
     });
 }
 

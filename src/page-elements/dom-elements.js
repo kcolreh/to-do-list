@@ -76,21 +76,22 @@ function createInput(type, name, classNameInput, id, placeholder) {
     input.name = name;
     input.id = id;
     input.placeholder = placeholder;
-
     return input;
 }
 
-function createLabel(forName, classNameLabel) {
+function createLabel(forName, classNameLabel, labelName) {
     const label = document.createElement('label');
     label.classList.add(classNameLabel);
     label.htmlFor = forName;
-
+    if (labelName !== undefined) {
+        label.innerHTML = labelName;
+    }
     return label;
 }
 
-export function createFullInput(forName, classNameLabel, type, name, classNameInput, id, pholder) {
+export function createFullInput(forName, classNameLabel, type, name, classNameInput, id, pholder, labelName) {
     const paragraph = createParagraph(null, 'input-holder', 'input-holder');
-    const newLabel = createLabel(forName, classNameLabel);
+    const newLabel = createLabel(forName, classNameLabel, labelName);
     const newInput = createInput(type, name, classNameInput, id, pholder);
 
     paragraph.appendChild(newLabel);

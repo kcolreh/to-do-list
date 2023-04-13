@@ -1,4 +1,3 @@
-import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import { taskArray } from './task-factory';
 import { cleanString, removeElementsByClass } from './project-factory';
 import { sort7DaysBoolean, sortTodayBoolean } from './date-logic';
@@ -34,9 +33,11 @@ export function sortNext7Days() {
         removeElementsByClass('task');
         mainSortTitle.innerHTML = daysBtn.innerHTML;
         taskArray.forEach((task) => {
-            if (sort7DaysBoolean(task.date) === true && task.projectName === projectStatus) {
-                const stringTask = JSON.stringify(task);
-                cleanString(stringTask);
+            if (task.projectName === projectStatus) {
+                if (sort7DaysBoolean(task.date) === true) {
+                    const stringTask = JSON.stringify(task);
+                    cleanString(stringTask);
+                }
             }
         });
     });
@@ -50,9 +51,11 @@ export function sortToday() {
         removeElementsByClass('task');
         mainSortTitle.innerHTML = todayBtn.innerHTML;
         taskArray.forEach((task) => {
-            if (sortTodayBoolean(task.date) === true && task.projectName === projectStatus) {
-                const stringTask = JSON.stringify(task);
-                cleanString(stringTask);
+            if (task.projectName === projectStatus) {
+                if (sort7DaysBoolean(task.date) === true) {
+                    const stringTask = JSON.stringify(task);
+                    cleanString(stringTask);
+                }
             }
         });
     });

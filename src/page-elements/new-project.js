@@ -7,6 +7,7 @@ import {
 } from './dom-elements';
 
 import { getProjectStatus } from '../functions/sort-tasks';
+import { validateProjectForm } from '../functions/validation';
 
 let idCounter = 0;
 
@@ -66,11 +67,13 @@ function crateProjectInterface() {
     submitButton.addEventListener('click', () => {
         const inputValue = document.getElementById('projectName');
         projectName.innerHTML = inputValue.value;
-        projectIntoArray();
-        createProjectDom(inputValue.value);
-        getProjectStatus(projectName.innerHTML);
-        deleteForm();
-        renderProject(input.value);
+        if (validateProjectForm() === true) {
+            projectIntoArray();
+            createProjectDom(inputValue.value);
+            getProjectStatus(projectName.innerHTML);
+            deleteForm();
+            renderProject(input.value);
+        }
     });
 }
 
